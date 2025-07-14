@@ -40,5 +40,5 @@ class PositionalEncoding(Module):
         Returns:
             返回位置编码后的输出.
         """
-        x = x + self.pe[:, : x.size(1), :]  # (batch_size, seq_len, d_model)
+        x = x + self.pe[:, : x.size(1), :]  # type: ignore # (batch_size, seq_len, d_model)
         return self.dropout(x)
