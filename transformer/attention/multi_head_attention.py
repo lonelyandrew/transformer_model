@@ -21,9 +21,9 @@ class MultiHeadAttention(Module):
         self.num_heads: int = num_heads
         self.head_dim: int = d_model // num_heads
 
-        self.w_q: Linear = Linear(d_model, self.head_dim)
-        self.w_k: Linear = Linear(d_model, self.head_dim)
-        self.w_v: Linear = Linear(d_model, self.head_dim)
+        self.w_q: Linear = Linear(d_model, d_model)
+        self.w_k: Linear = Linear(d_model, d_model)
+        self.w_v: Linear = Linear(d_model, d_model)
         self.w_o: Linear = Linear(d_model, d_model)
 
     def forward(self, q: Tensor, k: Tensor, v: Tensor, mask: Tensor | None = None) -> Tensor:

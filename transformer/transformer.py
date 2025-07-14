@@ -2,7 +2,7 @@ from torch import Tensor
 from torch.nn import Linear, Module
 from transformer.encoder import Encoder
 from transformer.decoder import Decoder
-from transformer.embeddings import Embeddings
+from transformer.embedding import SourceEmbedding, TargetEmbedding
 from transformer.mask import create_padding_mask, create_decoder_mask
 
 
@@ -32,8 +32,8 @@ class Transformer(Module):
         """
         super().__init__()
 
-        self.src_embeddings: Embeddings = Embeddings(d_model, src_vocab_size)
-        self.tgt_embeddings: Embeddings = Embeddings(d_model, tgt_vocab_size)
+        self.src_embeddings: SourceEmbedding = SourceEmbedding(d_model, src_vocab_size)
+        self.tgt_embeddings: TargetEmbedding = TargetEmbedding(d_model, tgt_vocab_size)
         self.encoder: Encoder = Encoder(d_model, num_heads, d_ff, num_layers, dropout)
         self.decoder: Decoder = Decoder(d_model, num_heads, d_ff, num_layers, dropout)
         self.fc_out: Linear = Linear(d_model, tgt_vocab_size)
